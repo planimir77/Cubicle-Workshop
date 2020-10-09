@@ -1,7 +1,8 @@
 const Cube = require('../models/cube');
+const createCube = (entry)=> {
 
-const cube = new Cube('Default', 'Description', 'http://www.google.com', 1);
-
-console.log(cube);
-
-cube.save();
+    const cube = Object.assign(new Cube(), entry);
+    
+    cube.save();
+}
+module.exports = {createCube};

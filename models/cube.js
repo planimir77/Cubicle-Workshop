@@ -4,12 +4,12 @@ const path = require('path');
 const database = path.join(__dirname, '../config/database.json');
 
 class Cube {
-    constructor(name, description, imageUrl, difficulty) {
+    constructor(name, description, imageUrl, difficultyLevel) {
         this.id = uniqid();
         this.name = name || "No name";
         this.description = description;
         this.imageUrl = imageUrl;
-        this.difficulty = difficulty || 0;
+        this.difficultyLevel = difficultyLevel || 0;
 
     }
     
@@ -20,7 +20,7 @@ class Cube {
             name: this.name,
             description: this.description,
             imageUrl: this.imageUrl,
-            difficulty: this.difficulty
+            difficultyLevel: this.difficultyLevel
         };
 
         fs.readFile(database, (error, data)=>{

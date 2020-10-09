@@ -9,7 +9,8 @@ module.exports = (app, express) => {
     app.set('view engine', '.hbs');
 
     //TODO: Setup the body parser
-    app.set(express.urlencoded({extended: true}));
+    app.use(express.urlencoded());
+    //app.set(express.urlencoded({extended: true}));
 
     //TODO: Setup the static files
     app.use('/static', express.static('static'));

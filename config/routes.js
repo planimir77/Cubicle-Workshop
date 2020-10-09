@@ -1,5 +1,6 @@
 const { getCubes } = require('../controllers/cubes');
 const { getCube } = require('../controllers/cube');
+const { createCube } = require('../controllers/create-cube')
 
 module.exports = (app) => {
     app.get('/', function (req, res) {
@@ -13,7 +14,7 @@ module.exports = (app) => {
 
     app.get('/details/:id', function (req, res) {
         const cube = getCube(req.params.id)[0];
-        res.render('details', { title: "Cube details" , id: cube.id, name: cube.name, description: cube.description, imageUrl: cube.imageUrl, difficulty: cube.difficulty});
+        res.render('details', { title: "Cube details", id: cube.id, name: cube.name, description: cube.description, imageUrl: cube.imageUrl, difficulty: cube.difficulty });
     });
 
     app.get('/create', function (req, res) {
@@ -21,8 +22,9 @@ module.exports = (app) => {
     });
 
     app.post('/create', function (req, res) {
-
-        res.render('create');
+        const entry = req.body;
+        createCube(entry);
+        res.redirect('/');
     });
 
     app.get('*', function (req, res) {
