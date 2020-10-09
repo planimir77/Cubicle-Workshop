@@ -14,4 +14,10 @@ const getCube = (id) => {
     return cube;
 };
 
-module.exports = { getCube, };
+const getCubes = () => {
+    const cubes = fs.readFileSync(database);
+
+    return JSON.parse(cubes);
+};
+
+module.exports = { getCube, getCubes, };

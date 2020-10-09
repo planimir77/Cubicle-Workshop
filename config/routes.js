@@ -1,5 +1,4 @@
-const { getCubes } = require('../controllers/cubes');
-const { getCube } = require('../controllers/cube');
+const { getCube, getCubes } = require('../controllers/cube-get');
 const { createCube } = require('../controllers/create-cube');
 
 module.exports = (app) => {
