@@ -20,7 +20,7 @@ class Cube {
             name: this.name,
             description: this.description,
             imageUrl: this.imageUrl,
-            difficultyLevel: this.difficultyLevel
+            difficultyLevel: this.difficultyLevel,
         };
 
         fs.readFile(database, (error, data)=>{
@@ -36,7 +36,7 @@ class Cube {
     
                 console.log("New cube is created");
             });
-        })
+        });
         
     }
 }

@@ -4,7 +4,7 @@ module.exports = (app, express) => {
     
     //TODO: Setup the view engine
     app.engine('.hbs', handlebars({
-        extname: '.hbs'
+        extname: '.hbs',
     }));
     app.set('view engine', '.hbs');
 

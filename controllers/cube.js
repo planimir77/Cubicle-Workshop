@@ -14,4 +14,4 @@ const getCube = (id) => {
     return cube;
 };
 
-module.exports = { getCube }
+module.exports = { getCube, };

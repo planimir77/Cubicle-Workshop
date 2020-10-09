@@ -8,4 +8,4 @@ const getCubes = () => {
     return JSON.parse(cubes);
 };
 
-module.exports = { getCubes }
+module.exports = { getCubes, };
