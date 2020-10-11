@@ -2,22 +2,27 @@ const fs = require('fs');
 const path = require('path');
 const database = path.join(__dirname, '../config/database.json');
 
-const getCube = (id) => {
-    const cubes = fs.readFileSync(database);
-    const test = Array.from(JSON.parse(cubes));
+const data = fs.readFileSync(database);
+const cubes = Array.from(JSON.parse(data));
 
-    const cube = test.filter(function(cube){
-        
-        return cube.id == id;
-    });
+const getCube = (id) => {
+    const cube = cubes.filter(cube => cube.id == id);
 
     return cube;
 };
 
-const getCubes = () => {
-    const cubes = fs.readFileSync(database);
+const getCubes = (query) => {
 
-    return JSON.parse(cubes);
+    if (query.from && query.to) {
+        const cubesFiltered = cubes.filter(cube =>
+            cube.name.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()) &&
+            Number(cube.difficultyLevel) >= Number(query.from) &&
+            Number(cube.difficultyLevel) <= Number(query.to));
+
+        return cubesFiltered;
+    }
+
+    return cubes;
 };
 
 module.exports = { getCube, getCubes, };
