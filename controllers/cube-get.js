@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const database = path.join(__dirname, '../config/database.json');
+const databaseJSON = path.join(__dirname, '../config/database.json');
 
-const data = fs.readFileSync(database);
+const data = fs.readFileSync(databaseJSON);
 const cubes = Array.from(JSON.parse(data));
+
 
 const getCube = (id) => {
     const cube = cubes.filter(cube => cube.id == id);
