@@ -2,9 +2,9 @@ const { getCube, getCubes } = require('../controllers/cube-get');
 const { createCube } = require('../controllers/create-cube');
 
 module.exports = (app) => {
-    app.get('/', function (req, res) {
+    app.get('/',async function (req, res) {
         const query = req.query;
-        const cubes = getCubes(query);
+        const cubes = await getCubes(query);
         res.render('index', { title: "Home page", cubes: cubes, });
     });
 
@@ -21,9 +21,9 @@ module.exports = (app) => {
         res.render('create', { title: "Create page", });
     });
 
-    app.post('/create', function (req, res) {
+    app.post('/create',async function (req, res) {
         const entry = req.body;
-        createCube(entry);
+        await createCube(entry);
         res.redirect('/');
     });
 
