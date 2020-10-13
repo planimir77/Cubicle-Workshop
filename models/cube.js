@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
+const validator = require('node-mongoose-validator');
 
 const cubeSchema = new mongoose.Schema({
     name: { type: String, required: true, },
     description: { type: String, required: true, maxlength: 255, },
-    imageUrl: { type: String, required: true, http: true, },
+    imageUrl: {
+        type: String,
+        required: true,
+        validate: validator.isURL({ protocols: ['http','https',], require_protocol: true ,}),
+    },
     difficultyLevel: { type: Number, required: true, min: 1, max: 6, },
-    accessories: [{ type: Schema.Types.ObjectId, ref: 'Accessories', },],
+    accessories: [{ type: 'ObjectId', ref: 'Accessories', },],
 });
 
 module.exports = mongoose.model('Cube', cubeSchema, 'cubes');
