@@ -5,6 +5,7 @@ const cubeSchema = new mongoose.Schema({
     description: { type: String, required: true, maxlength: 255, },
     imageUrl: { type: String, required: true, http: true, },
     difficultyLevel: { type: Number, required: true, min: 1, max: 6, },
+    accessories: [{ type: Schema.Types.ObjectId, ref: 'Accessories', },],
 });
 
 module.exports = mongoose.model('Cube', cubeSchema, 'cubes');
