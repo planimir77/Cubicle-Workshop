@@ -1,4 +1,5 @@
 const Cube = require('../models/Cube');
+const Accessory = require('../models/Accessory');
 const mongoose = require('mongoose');
 
 const createCube = async (entry) => {
@@ -9,7 +10,7 @@ const createCube = async (entry) => {
             'imageUrl': entry.imageUrl,
             'difficultyLevel': entry.difficultyLevel,
         });
-        
+
         const cube = await newCube.save();
         //when success it print.
         console.log(cube.toObject());
@@ -23,4 +24,18 @@ const createCube = async (entry) => {
     // cube.save();
 };
 
-module.exports = { createCube, };
+const updateCube = async (cubeId, accessoryId) => {
+    try {
+        await Cube.findByIdAndUpdate(cubeId, {
+            $push: { accessories: accessoryId, },
+        });
+        await Accessory.findByIdAndUpdate(accessoryId, {
+            $push: {cubes: cubeId,},
+        });
+        
+    } catch (error) {
+        console.error('Error: ' + error);
+    }
+}
+
+module.exports = { createCube, updateCube, };

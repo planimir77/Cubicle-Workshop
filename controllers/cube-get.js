@@ -1,16 +1,26 @@
-const fs = require('fs');
-const path = require('path');
-const databaseJSON = path.join(__dirname, '../config/database.json');
 const Cube = require('../models/Cube');
 
-const data = fs.readFileSync(databaseJSON);
-const cubes = Array.from(JSON.parse(data));
+// from local storage database.json
+// const fs = require('fs');
+// const path = require('path');
+// const databaseJSON = path.join(__dirname, '../config/database.json');
+
+// const data = fs.readFileSync(databaseJSON);
+// const cubes = Array.from(JSON.parse(data));
 
 
-const getCube = (id) => {
-    const cube = cubes.filter(cube => cube.id == id);
+const getCube = async (id) => {
+    try {
+        const cube = await Cube.findById(id);
+        console.log(cube.toObject());
 
-    return cube;
+        return cube.toObject();
+    } catch (error) {
+        console.error('Error :', error.massage);
+    }
+    // from local storage database.json
+    // const cube = cubes.filter(cube => cube.id == id);
+    // return cube;
 };
 
 const getCubes = async (query) => {
@@ -24,7 +34,7 @@ const getCubes = async (query) => {
         console.error("Error: ", error);
     } 
 
-    // Get Cubes from database.json
+    // Get filtered Cubes from database.json
     // if (query.from && query.to) {
     //     const cubesFiltered = cubes.filter(cube =>
     //         cube.name.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()) &&
