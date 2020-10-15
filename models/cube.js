@@ -10,7 +10,7 @@ const cubeSchema = new mongoose.Schema({
         validate: validator.isURL({ protocols: ['http','https',], require_protocol: true ,}),
     },
     difficultyLevel: { type: Number, required: true, min: 1, max: 6, },
-    accessories: [{ type: 'ObjectId', ref: 'Accessories', },],
+    accessories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Accessory', },],
 });
 
 module.exports = mongoose.model('Cube', cubeSchema, 'cubes');
